@@ -147,7 +147,7 @@ extension HKStatistics: Harmonizable {
         case .environmentalAudioExposure,
              .headphoneAudioExposure:
             if #available(iOS 13.0, *) {
-                return quantity(unit: HKUnit.decibelAWeightedSoundPressureLevel())
+                return statistics(unit: HKUnit.decibelAWeightedSoundPressureLevel())
             } else {
                 throw HealthKitError.notAvailable(
                     "\(type) is not available for the current iOS"
