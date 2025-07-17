@@ -146,7 +146,13 @@ extension HKStatistics: Harmonizable {
             return statistics(unit: HKUnit.literUnit(with: .milli))
         case .environmentalAudioExposure,
              .headphoneAudioExposure:
-            return statistics(unit: HKUnit.pascal())
+            if #available(iOS 13.0, *) {
+                return quantity(unit: HKUnit.decibelAWeightedSoundPressureLevel())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
         case .runningPower:
             if #available(iOS 16.0, *) {
                 return statistics(unit: HKUnit.watt())
