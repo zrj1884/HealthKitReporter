@@ -1,3 +1,7 @@
+## [3.1.1] - 07.17.2025.
+
+* Fix environmentalAudioExposure unit error.
+
 ## [3.1.0] - 08.01.2024.
 
 * Added support for HKClinicalRecord
