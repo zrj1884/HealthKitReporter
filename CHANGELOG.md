@@ -1,3 +1,7 @@
+## [3.1.2] - 07.21.2025.
+
+* Upgrade Health Type Identifiers until iOS 18.0.
+
 ## [3.1.1] - 07.17.2025.
 
 * Fix environmentalAudioExposure unit error.

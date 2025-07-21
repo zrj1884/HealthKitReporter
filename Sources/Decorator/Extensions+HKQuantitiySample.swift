@@ -30,6 +30,10 @@ extension HKQuantitySample: Harmonizable {
              .distanceWalkingRunning,
              .distanceWheelchair,
              .distanceDownhillSnowSports,
+             .distanceCrossCountrySkiing,
+             .distancePaddleSports,
+             .distanceRowing,
+             .distanceSkatingSports,
              .height,
              .waistCircumference,
              .walkingStepLength,
@@ -127,7 +131,10 @@ extension HKQuantitySample: Harmonizable {
         case .walkingSpeed,
              .stairAscentSpeed,
              .stairDescentSpeed,
-             .runningSpeed:
+             .runningSpeed,
+             .cyclingSpeed,
+             .paddleSportsSpeed,
+             .rowingSpeed:
             return quantity(unit: HKUnit.meter().unitDivided(by: HKUnit.second()))
         case .heartRateVariabilitySDNN:
             return quantity(unit: HKUnit.secondUnit(with: .milli))
@@ -153,9 +160,82 @@ extension HKQuantitySample: Harmonizable {
                     "\(type) is not available for the current iOS"
                 )
             }
+        case .environmentalSoundReduction:
+            if #available(iOS 16.0, *) {
+                return quantity(unit: HKUnit.decibelAWeightedSoundPressureLevel())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
         case .runningPower:
             if #available(iOS 16.0, *) {
                 return quantity(unit: HKUnit.watt())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .cyclingPower:
+            if #available(iOS 17.0, *) {
+                return quantity(unit: HKUnit.watt())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .cyclingCadence:
+            if #available(iOS 17.0, *) {
+                return quantity(unit: HKUnit.count().unitDivided(by: HKUnit.minute()))
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .cyclingFunctionalThresholdPower:
+            if #available(iOS 17.0, *) {
+                return quantity(unit: HKUnit.watt())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .crossCountrySkiingSpeed:
+            if #available(iOS 18.0, *) {
+                return quantity(unit: HKUnit.meter().unitDivided(by: HKUnit.second()))
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .estimatedWorkoutEffortScore,
+             .workoutEffortScore:
+            if #available(iOS 18.0, *) {
+                return quantity(unit: HKUnit.count())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .physicalEffort:
+            if #available(iOS 17.0, *) {
+                return quantity(unit: HKUnit.count())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .timeInDaylight:
+            if #available(iOS 17.0, *) {
+                return quantity(unit: HKUnit.second())
+            } else {
+                throw HealthKitError.notAvailable(
+                    "\(type) is not available for the current iOS"
+                )
+            }
+        case .appleSleepingBreathingDisturbances:
+            if #available(iOS 18.0, *) {
+                return quantity(unit: HKUnit.count())
             } else {
                 throw HealthKitError.notAvailable(
                     "\(type) is not available for the current iOS"

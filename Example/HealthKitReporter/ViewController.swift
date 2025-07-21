@@ -54,6 +54,9 @@ class ViewController: UIViewController {
     @IBAction func writeButtonTapped(_ sender: UIButton) {
         healthKitReporterSerivce.writeSteps()
         healthKitReporterSerivce.writeBloodPressureCorrelation()
+        // 调用新增的方法
+        healthKitReporterSerivce.writeNewQuantityTypes()
+        healthKitReporterSerivce.writeNewCategoryTypes()
     }
     @IBAction func seriesButtonTapped(_ sender: UIButton) {
         healthKitReporterSerivce.readWorkoutRoutes()
