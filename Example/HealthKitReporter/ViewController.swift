@@ -47,6 +47,8 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func readButtonTapped(_ sender: UIButton) {
+        // 添加类型支持检查
+        healthKitReporterSerivce.checkSupportedTypes()
         healthKitReporterSerivce.readCategories()
         healthKitReporterSerivce.readElectrocardiogram()
         healthKitReporterSerivce.readQuantitiesAndStatistics()
