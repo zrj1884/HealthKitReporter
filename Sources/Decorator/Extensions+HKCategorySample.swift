@@ -81,7 +81,7 @@ extension HKCategorySample: Harmonizable {
                 )
             }
         case .audioExposureEvent:
-            if #available(iOS, introduced: 13.0, deprecated: 14.0, renamed: "HKCategoryTypeIdentifier.environmentalAudioExposureEvent") {
+            if #available(iOS 13.0, *) {
                 if let value = HKCategoryValueAudioExposureEvent(rawValue: value) {
                     description = value.description
                     detail = value.detail

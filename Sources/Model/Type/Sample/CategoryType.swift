@@ -108,7 +108,7 @@ public enum CategoryType: Int, CaseIterable, SampleType {
                 return HKObjectType.categoryType(forIdentifier: .appetiteChanges)
             }
         case .audioExposureEvent:
-            if #available(iOS, introduced: 13.0, deprecated: 14.0, renamed: "HKCategoryTypeIdentifier.environmentalAudioExposureEvent") {
+            if #available(iOS 13.0, *) {
                 return HKObjectType.categoryType(forIdentifier: .audioExposureEvent)
             }
         case .bleedingAfterPregnancy:
