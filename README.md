@@ -320,7 +320,7 @@ pod 'HealthKitReporter'
 or 
 
 ```ruby
-pod 'HealthKitReporter', '~> 3.1.2'
+pod 'HealthKitReporter', '~> 3.1.3'
 ```
 
 ### Swift Package Manager
@@ -330,7 +330,7 @@ To install it, simply add the following lines to your Package.swift file
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/VictorKachalov/HealthKitReporter.git", from: "3.1.2")
+    .package(url: "https://github.com/VictorKachalov/HealthKitReporter.git", from: "3.1.3")
 ]
 ```
 
@@ -339,7 +339,7 @@ dependencies: [
 Add the line in your cartfile 
 
 ```ruby
-github "VictorKachalov/HealthKitReporter" "3.1.2"
+github "VictorKachalov/HealthKitReporter" "3.1.3"
 ```
 
 ## Author
