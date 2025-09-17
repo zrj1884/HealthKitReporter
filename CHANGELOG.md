@@ -1,5 +1,10 @@
 # Versions
 
+## [3.1.4] - 09.17.2025
+
+* Update example to support clinical record read.
+* Add isClinicalRecordAvailable function.
+
 ## [3.1.3] - 07.22.2025
 
 * Update example to support more health type indentifiers.
