@@ -120,4 +120,13 @@ public class HealthKitManager {
             completion(false, error)
         }
     }
+    
+    public var isClinicalRecordsAvailable: Bool {
+        if #available(iOS 12.0, *) {
+            healthStore.supportsHealthRecords()
+        } else {
+            // Fallback on earlier versions
+            false
+        }
+    }
 }

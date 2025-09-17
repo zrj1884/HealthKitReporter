@@ -382,6 +382,7 @@ final class HealthKitReporterService {
     init() {
         if HealthKitReporter.isHealthDataAvailable {
             reporter = HealthKitReporter()
+            print("isClinicalRecordsAvailable: \(reporter!.manager.isClinicalRecordsAvailable)")
         } else {
             print("HealthKitReporter is not available")
         }

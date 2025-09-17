@@ -545,6 +545,7 @@
 				CODE_SIGN_ENTITLEMENTS = HealthKitReporter_Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2539QS76GX;
 				INFOPLIST_FILE = HealthKitReporter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -570,6 +571,7 @@
 				CODE_SIGN_ENTITLEMENTS = HealthKitReporter_Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2539QS76GX;
 				INFOPLIST_FILE = HealthKitReporter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
