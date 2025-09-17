@@ -354,7 +354,7 @@ final class HealthKitReporterService {
         
         if #available(iOS 18.0, *) {
             types.append(contentsOf: [
-                .appleSleepingBreathingDisturbances, 
+//                .appleSleepingBreathingDisturbances, 
                 .crossCountrySkiingSpeed, 
                 .distanceCrossCountrySkiing, 
                 .distancePaddleSports, 
@@ -369,6 +369,18 @@ final class HealthKitReporterService {
         
         return types
     }
+    
+    private var typesClinical: [ClinicalType] {
+        [
+            .allergyRecord,
+            .conditionRecord,
+            .immunizationRecord,
+            .labResultRecord,
+            .medicationRecord,
+            .procedureRecord,
+            .vitalSignRecord
+        ]
+    }
 
     private var predicate: NSPredicate {
         let now = Date()
@@ -382,10 +394,13 @@ final class HealthKitReporterService {
     init() {
         if HealthKitReporter.isHealthDataAvailable {
             reporter = HealthKitReporter()
-            print("isClinicalRecordsAvailable: \(reporter!.manager.isClinicalRecordsAvailable)")
         } else {
             print("HealthKitReporter is not available")
         }
+    }
+    
+    func isClinicalRecordsAvailable() -> Bool {
+        return reporter?.manager.isClinicalRecordsAvailable ?? false
     }
 
     func requestAuthorization(completion: @escaping StatusCompletionBlock) {
@@ -394,6 +409,10 @@ final class HealthKitReporterService {
             toWrite: typesToWrite,
             completion: completion
         )
+    }
+    
+    func requestRecordAuthorization(completion: @escaping StatusCompletionBlock) {
+        reporter?.manager.requestAuthorization(toRead: typesClinical, toWrite: [], completion: completion)
     }
 
     func readCategories() {
@@ -1143,6 +1162,35 @@ final class HealthKitReporterService {
                 }
             } catch {
                 print("Error encoding sample:", error)
+            }
+        }
+    }
+    
+    func readClinicalRecords() {
+        let manager = reporter?.manager
+        let reader = reporter?.reader
+        for type in typesClinical {
+            do {
+                if let query = try reader?.sampleQuery(
+                    type: type,
+                    predicate: predicate,
+                    resultsHandler: {_, results, error in
+                    if error == nil {
+                        for element in results {
+                            do {
+                                print(try element.encoded())
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    } else {
+                        print(error ?? "error")
+                    }
+                }) {
+                    manager?.executeQuery(query)
+                }
+            } catch {
+                print(error)
             }
         }
     }

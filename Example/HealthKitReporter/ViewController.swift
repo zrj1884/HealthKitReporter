@@ -12,13 +12,17 @@ import HealthKitReporter
 class ViewController: UIViewController {
     @IBOutlet weak var readButton: UIButton!
     @IBOutlet weak var writeButton: UIButton!
+    @IBOutlet weak var readRecordButton: UIButton!
 
     private let healthKitReporterSerivce = HealthKitReporterService()
+    private var isRecordAvalible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         readButton.isEnabled = false
         writeButton.isEnabled = false
+        readRecordButton.isEnabled = false
+        isRecordAvalible = healthKitReporterSerivce.isClinicalRecordsAvailable()
     }
 
     @IBAction func authorizeButtonTapped(_ sender: UIButton) {
@@ -63,5 +67,34 @@ class ViewController: UIViewController {
     @IBAction func seriesButtonTapped(_ sender: UIButton) {
         healthKitReporterSerivce.readWorkoutRoutes()
         healthKitReporterSerivce.readHearbeatSeries()
+    }
+    @IBAction func authorizeRecordButtonTapped(_ sender: UIButton) {
+        if (isRecordAvalible) {
+            healthKitReporterSerivce.requestRecordAuthorization { success, error in
+                if success && error == nil {
+                    DispatchQueue.main.async { [unowned self] in
+                        let alert = UIAlertController(
+                            title: "Clinical",
+                            message: "Clinical Authorized",
+                            preferredStyle: .alert
+                        )
+                        alert.addAction(
+                            UIAlertAction(
+                                title: "OK",
+                                style: .default
+                            ) { [unowned self] (_) in
+                                self.readRecordButton.isEnabled = true
+                            }
+                        )
+                        self.present(alert, animated: true)
+                    }
+                } else {
+                    print(error ?? "error")
+                }
+            }
+        }
+    }
+    @IBAction func readRecordButtonTapped(_ sender: UIButton) {
+        healthKitReporterSerivce.readClinicalRecords()
     }
 }
